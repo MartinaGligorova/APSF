@@ -162,7 +162,8 @@ public class WindowsExplorer {
                     break;
 
                 case "PRINT":
-
+                    tree.printTree();
+                    break;
             }
         }
     }

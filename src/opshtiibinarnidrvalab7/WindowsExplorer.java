@@ -64,8 +64,6 @@ class SLLTree<E extends Comparable<E>> implements Tree<E> {
         root = new SLLNode<E>(elem);
     }
 
-    // insertFirst simulirano dodavanje dete -> izmeni vo LEKSIKOGRAFSKO dodavanje dete
-
     public Node<E> addChild(Node<E> node, E elem) {
         SLLNode<E> tmp = new SLLNode<E>(elem);
         SLLNode<E> curr = (SLLNode<E>) node;
@@ -79,11 +77,6 @@ class SLLTree<E extends Comparable<E>> implements Tree<E> {
         // nov jazol so elementot od vlez
         SLLNode<E> tmp = new SLLNode<E>(elem);
         SLLNode<E> curr = (SLLNode<E>) sortPok;
-
-        // dodadi sibling na sortPok jazol od vlez
-
-        //
-
         tmp.sibling = curr.sibling;
         curr.sibling = tmp;
         tmp.parent = curr.parent;
@@ -303,7 +296,7 @@ public class WindowsExplorer {
                             takeRoot = novRoot;
                             break;
                         }
-                        // sme se simnale vo foldeot, no prviot element od podlista != od folder na vlez
+                        // sme se simnale vo folderot, no prviot element od podlista != od folder na vlez
                         else if (!(pokRoot.element.equals(podniza[j + 1]))) {
                             // dvizhi se niz siblings
                             while (pokRoot.sibling != null) {
@@ -377,11 +370,9 @@ public class WindowsExplorer {
                                                 tekoven.element + "\\");
                                         break;
                                     }
-
                                 }
                             }
                         }
-
                     }
 
 
