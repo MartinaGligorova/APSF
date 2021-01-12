@@ -159,7 +159,6 @@ public class WindowsExplorer {
                     if (tmp.parent != null) {
                         tmp = tmp.parent;
                     }
-
                     break;
 
                 case "PRINT":
