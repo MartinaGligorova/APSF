@@ -1,4 +1,4 @@
-package codeexercises;
+package codeexercisesopstibinarnidrva;
 
 import java.util.NoSuchElementException;
 
@@ -14,7 +14,7 @@ class BNode<E> {
     // staticki promenlivi za direkten pristap
 
     public BNode(E info) {
-        // jazol bez deca
+        // jazol bez deca - inicijaliz. na koren
         this.info = info;
         left = null;
         right = null;
@@ -27,6 +27,8 @@ class BNode<E> {
         this.right = right;
     }
 
+    // default constructor
+    public BNode() {}
 }
 
 interface Stack<E> {
@@ -123,6 +125,7 @@ class BTree<E> {
 
     public void makeRoot(E elem) {
         // kreiraj nov jazol so vredn. elem i postavi go kako root na drvo
+        // modifikacija na metod poradi zad.
         root = new BNode<E>(elem);
     }
 
@@ -135,6 +138,8 @@ class BTree<E> {
 
         BNode<E> tmp = new BNode<E>(elem);
         // nov jazol
+
+        // gradenje na drvoto od pocetok
 
         if (where == BNode.LEFT) {
             // 1 - levo dete na node
