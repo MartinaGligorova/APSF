@@ -164,7 +164,7 @@ class CBHT<K extends Comparable<K>, E> {
 
 
 public class SimpleEmailSystem implements Comparable<SimpleEmailSystem> {
-    // key od tip SimpleEmailSystem - sporedlivi megju sebe - kako e pretstaven kluchot?
+
 
     // klucot e sostaven od naslov, datum i vreme na poraka
 
@@ -187,12 +187,8 @@ public class SimpleEmailSystem implements Comparable<SimpleEmailSystem> {
 
 
     public int hashCode() {
-        // hesh funkcija spored sto ke go mapirash klucot vo celobrojna vrednost - creativity
-        // mozes del od klucot...mozes celiot kluc(za da izbegnes premn kolizii)
-        // zashteda na vreme
-
         return (naslov + datumVreme).hashCode();
-        // znaci translacijata vo koficka - indeks od nizata e spored naslovot idatumot i vremeto NE I KATEGORIJATA!!
+
     }
 
 
@@ -221,16 +217,12 @@ public class SimpleEmailSystem implements Comparable<SimpleEmailSystem> {
         // broj na poraki vo sistemot
         int N = Integer.parseInt(bf.readLine());
         SimpleEmailSystem kluch;
-        // izgradi CBHT - citaj od vlez i vmetnuvaj vo niza od listi
+
         CBHT<SimpleEmailSystem, Integer> tabela = new CBHT<>((int) (N / 0.5));
-        // znaci klucot e od tip SimpleEmailSystem - prof stavil i category vo kluchot kako unique identifier na porakata, a
-        // brojot na izvrsheni komandi da e value
         for (int i = 0; i < N; i++) {
-            // citaj od vlez
+
             String line = bf.readLine();
-            // podeli go input vo podniza od strings naslov, datum, vreme, kategorija
             String[] podniza = line.split(" ");
-            // ova se strings nasiot key e SimpleEmailSystem objc. pa kreiraj takov objekt
             String naslov = podniza[0];
             String datumVreme = podniza[1] + " " + podniza[2];
             kluch = new SimpleEmailSystem(naslov, datumVreme, Category.valueOf(podniza[3]));
@@ -245,13 +237,10 @@ public class SimpleEmailSystem implements Comparable<SimpleEmailSystem> {
 
         SimpleEmailSystem kluch2;
         for (int j = 0; j < H; j++) {
-            // procitaj ja komandata
+
             String line = bf.readLine();
             String[] podniza = line.split(" ");
             komanda = podniza[0];
-            // najdi go elementot vo HT - ako postoi pred da izvrsis komandi
-
-            // 2 stringa na vlez prima naslov i datumiVreme
             SLLNode<MapEntry<SimpleEmailSystem, Integer>> pokazuvac1 = tabela.search(new SimpleEmailSystem(podniza[1], podniza[2] + " " + podniza[3]));
             // prebaraj vo tabela dali postoi elementot
             if (pokazuvac1 == null) {
@@ -260,11 +249,10 @@ public class SimpleEmailSystem implements Comparable<SimpleEmailSystem> {
             }
 
             // pronajden jazol - pristapi kluch i value na MapEntry-to
-            kluch2 = pokazuvac1.element.key; // zemi kluchot celosen so category od toj jazol VO HT (kaj sto ima i kategorii)
-            brojKomandi = pokazuvac1.element.value; // zemi go brojot na komandi vo toj jazol
+            kluch2 = pokazuvac1.element.key;
+            brojKomandi = pokazuvac1.element.value;
 
 
-            // dokolku postoi procitaj komanda -> i update value + kategorija (staj ja kategorijata kako del od string)
             if (komanda.equals("UNREAD_MESSAGE") && kluch2.kategorija == Category.READ) {
                 // smeni kategorija na kluchot - znachi si pristapuvas do kluchevi etc
                 kluch2.kategorija = Category.UNREAD;
@@ -279,24 +267,21 @@ public class SimpleEmailSystem implements Comparable<SimpleEmailSystem> {
                 continue;
 
             brojKomandi++;
-            // value e integer taka da vnesi go noviot broj na komandi
             tabela.insert(kluch2, brojKomandi);
         }
 
-        // sledno brojot na poraki za koi sakame da ispecatime kategorija i broj na komandi - value od HT
+        // brojot na poraki za koi sakame da ispecatime kategorija i broj na komandi
         int P = Integer.parseInt(bf.readLine());
         SimpleEmailSystem obj;
         for (int k = 0; k < P; k++) {
             String line = bf.readLine();
             String[] podniza = line.split(" ");
-            // heshiranjeto - translacija od kluc vo index od niza vo hesh tabela se vrsese samo preku naslov i datumvreme
             String naslovVlez = podniza[0];
             String datumVremeVlez = podniza[1] + " " + podniza[2];
 
             obj = new SimpleEmailSystem(naslovVlez, datumVremeVlez);
 
-            SLLNode<MapEntry<SimpleEmailSystem, Integer>> najdi = tabela.search(obj); // spored kluch
-            // hash funkcija od klucot - naslovot i datum i vreme --> koficka
+            SLLNode<MapEntry<SimpleEmailSystem, Integer>> najdi = tabela.search(obj);
             if (najdi == null)
                 continue;
 
@@ -306,6 +291,5 @@ public class SimpleEmailSystem implements Comparable<SimpleEmailSystem> {
 }
 
 enum Category {
-    // klasa - sodrzhi konstanti
     READ, UNREAD, TRASH;
 }
